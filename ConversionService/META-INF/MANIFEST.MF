@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConversionService
+Bundle-SymbolicName: ConversionService
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: conversionservice.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-13
+Import-Package: org.osgi.framework;version="1.3.0"
+Automatic-Module-Name: ConversionService
+Export-Package: conversionservice
