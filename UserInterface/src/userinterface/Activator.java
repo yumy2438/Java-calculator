@@ -20,7 +20,7 @@ public class Activator implements BundleActivator {
 
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		Locale current_locale = new Locale("tr","TR");//Locale.getDefault();
+		Locale current_locale = Locale.getDefault();
 		ServiceReference<?> serviceReference = context.getServiceReference(ConversionService.class);
 		ConversionService service = (ConversionService) context.getService(serviceReference);
 		CalculatorGUI.start_gui(service, current_locale);	

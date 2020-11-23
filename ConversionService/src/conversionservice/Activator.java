@@ -24,7 +24,7 @@ public class Activator implements BundleActivator {
 	
 	private void registryConversionService() 
 	{
-		Locale current_locale = new Locale("tr","TR");Locale.getDefault();
+		Locale current_locale = Locale.getDefault();
 		ConversionService service = new ConversionServiceImpl(current_locale);
 		context.registerService(ConversionService.class, service, null);
 	}
