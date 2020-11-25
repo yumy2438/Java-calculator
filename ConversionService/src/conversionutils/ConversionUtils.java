@@ -29,6 +29,13 @@ public class ConversionUtils {
 		return new BigInteger(number_readings.getString(text.trim().toLowerCase()));
 	}
 	
+	public int get_1_digit_number_from_reading(String number_reading) throws MissingResourceException
+	{
+		int number = convert_text_into_numbers(number_reading);
+		if(number<10) return number;
+		throw new MissingResourceException("", "", "");
+	}
+	
 	private int get_2_digit_number_from_reading(String number_reading) throws MissingResourceException
 	{
 		String[] number_readings = number_reading.trim().toLowerCase().split(" ");
@@ -36,8 +43,7 @@ public class ConversionUtils {
 		if (tens_digit<10 || tens_digit>99) throw new MissingResourceException("","","");//checking 2-digit
 		if (number_readings.length > 1)
 		{
-			int ones_digit = convert_text_into_numbers(number_readings[1]);
-			if(ones_digit>10) throw new MissingResourceException("", "", "");
+			int ones_digit = get_1_digit_number_from_reading(number_readings[1]);
 			return tens_digit+ones_digit;
 		}
 		return tens_digit;
@@ -46,7 +52,7 @@ public class ConversionUtils {
 	private int get_3_digit_number_from_reading(String number_reading) throws MissingResourceException//üç yüz seksen üç, yüz iki, yüz seksen üç
 	{
 		String reading_100 = this.number_readings.getString("100");
-		if (!number_reading.contains(reading_100)) throw new java.util.MissingResourceException("a", "b", "c");
+		if (!number_reading.contains(reading_100)) throw new java.util.MissingResourceException("", "", "");
 		String [] number_readings = number_reading.trim().toLowerCase().split(reading_100);
 		switch (number_readings.length)
 		{
@@ -64,16 +70,15 @@ public class ConversionUtils {
 				}
 				catch (java.util.MissingResourceException e)
 				{
-					rest_number = convert_text_into_numbers(number_readings[1]);
+					rest_number = get_1_digit_number_from_reading(number_readings[1]);
 				}
 				if(!number_readings[0].equals("")) //yüz üç
 				{
 					return rest_number+convert_text_into_numbers(number_readings[0])*100;
 				}
 				return 100+rest_number;
-		}
-		
-		return 0;
+		}	
+		throw new MissingResourceException("", "", "");
 	}
 	
 	public int get_number(String number_reading) throws MissingResourceException
@@ -93,7 +98,7 @@ public class ConversionUtils {
 			{
 				try
 				{
-					number = convert_text_into_numbers(number_reading);	
+					number = get_1_digit_number_from_reading(number_reading);	
 				}
 				catch(Exception e3)
 				{
